@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-amazon-900: #0a0f0a;
+  --color-amazon-800: #111a11;
+  --color-amazon-700: #1e2e1e;
+  --color-amazon-600: #2a3e2a;
+  --color-amazon-500: #3a5a3a;
+  --color-amazon-400: #6a8a6a;
+  --color-amazon-300: #8aaa8a;
+  --color-amazon-200: #b4d4b4;
+  --color-amazon-100: #d4e8d4;
+  --color-amazon-50: #eaf5ea;
+
+  --color-forest: #3ddc6e;
+  --color-forest-dim: #1a5c2e;
+  --color-danger: #e8544a;
+  --color-danger-dim: #5c1a1a;
+  --color-amber: #f5a623;
+  --color-teal: #4ecdc4;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-amazon-900);
+  color: var(--color-amazon-100);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-amazon-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-amazon-600);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-amazon-500);
+}
