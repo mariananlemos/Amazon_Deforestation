@@ -6,7 +6,6 @@ import { SeasonalityAndStates } from './components/SeasonalityAndStates';
 import { ModelResults } from './components/ModelResults';
 import { ForecastChart } from './components/ForecastChart';
 import { Methodology } from './components/Methodology';
-import { Improvements } from './components/Improvements';
 
 export default function App() {
   return (
@@ -19,7 +18,6 @@ export default function App() {
       <ModelResults />
       <ForecastChart />
       <Methodology />
-      <Improvements />
       <Footer />
     </div>
   );
