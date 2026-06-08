@@ -95,7 +95,7 @@ export function ForecastChart() {
               </p>
               <p className="mt-1 text-sm text-amazon-200">
                 Forecast recursivo: cada previsão atualiza os lags (t-1) e médias móveis para o
-                passo seguinte, capturando a dinâmica temporal.
+                passo seguinte. Isso capta a dinâmica temporal, mas também acumula erro ao longo do horizonte.
               </p>
             </div>
 
@@ -115,6 +115,15 @@ export function ForecastChart() {
                   </span>
                 ))}
               </div>
+            </div>
+
+            <div>
+              <p className="text-[10px] font-medium tracking-wider uppercase text-amazon-500">
+                Observação
+              </p>
+              <p className="mt-1 text-sm text-amazon-200">
+                Esta visualização mostra projeções pontuais. Para uso analítico mais sério, faltam intervalos de confiança e cenários alternativos.
+              </p>
             </div>
           </div>
         </Card>

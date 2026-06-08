@@ -33,7 +33,7 @@ export function SeasonalityAndStates() {
         <Card>
           <h3 className="text-lg font-semibold text-white">Sazonalidade Mensal</h3>
           <p className="mb-4 mt-1 text-xs text-amazon-400">
-            Média de km² alertados por mês — destaque para o período seco (Ago–Out)
+            Média de km² alertados por mês — destaque para o período seco (Ago–Out) nesta agregação
           </p>
           <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -72,7 +72,7 @@ export function SeasonalityAndStates() {
           <div className="mt-3 rounded-lg border border-amazon-700 bg-amazon-900/50 px-4 py-3">
             <p className="text-xs text-amazon-300">
               <span className="font-semibold text-danger">Ago, Set e Out</span> concentram os picos
-              de desmatamento — período seco na Amazônia que facilita atividades de queimada e corte.
+              de desmatamento nesta série agregada — período seco na Amazônia que costuma facilitar atividades de queimada e corte.
             </p>
           </div>
         </Card>
@@ -134,7 +134,7 @@ export function SeasonalityAndStates() {
           </div>
           <div className="mt-3 rounded-lg border border-amazon-700 bg-amazon-900/50 px-4 py-3">
             <p className="text-xs text-amazon-300">
-              <span className="font-semibold text-danger">Pará</span> lidera com mais de 17.800 km²
+              <span className="font-semibold text-danger">Pará</span> lidera a série mostrada com mais de 17.800 km²
               alertados, seguido por Mato Grosso e Amazonas.
             </p>
           </div>

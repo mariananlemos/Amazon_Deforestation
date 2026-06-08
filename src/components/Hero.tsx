@@ -59,7 +59,7 @@ export function Hero() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg text-amazon-300 leading-relaxed">
-          Análise preditiva de alertas de desmatamento usando Machine Learning
+          Análise exploratória de alertas de desmatamento usando Machine Learning
           e séries temporais sobre dados do DETER-AMZ (2015–2025).
         </p>
 
@@ -88,7 +88,7 @@ export function Hero() {
           {[
             { label: '10 anos de dados', color: 'text-forest' },
             { label: '3 modelos comparados', color: 'text-teal' },
-            { label: 'R² = 0.731', color: 'text-amber' },
+            { label: 'R² = 0.731*', color: 'text-amber' },
           ].map((pill) => (
             <span
               key={pill.label}
@@ -98,6 +98,10 @@ export function Hero() {
             </span>
           ))}
         </div>
+
+        <p className="mx-auto mt-4 max-w-xl text-[11px] text-amazon-500">
+          *Valor observado no notebook para um único split temporal; não é garantia de generalização.
+        </p>
       </motion.div>
 
       {/* Scroll indicator */}

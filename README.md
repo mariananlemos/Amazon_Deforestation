@@ -9,9 +9,9 @@
 This project builds on official Brazilian deforestation alert data published by INPE (National Institute for Space Research) through the DETER-AMZ system. It applies time-series feature engineering and machine learning to predict monthly deforested area (km²) in the Amazon, replacing a naive linear regression baseline with more robust models.
 
 **Key results:**
-- **2024/2025** was the worst year on record: **54,674 km²** alerted — up **+88%** from the previous year.
-- Gradient Boosting achieved a dramatically higher R² than the original linear model (~0.0001 → significant improvement).
-- SARIMA and Gradient Boosting forecasts are compared against held-out test data.
+- **2024/2025** was the highest-alert year in this dataset slice: **54,674 km²** alerted — about **+88%** from the previous year.
+- Gradient Boosting outperformed the original linear baseline in this temporal split, with a clearly better R² in the notebook run.
+- SARIMA and Gradient Boosting forecasts are compared against a held-out test window from the final months of the series.
 
 ---
 
@@ -31,7 +31,7 @@ The raw file used is `deter-amz-aggregated-03-03-2026-17_42_42.csv`, containing 
 
 ### 1. Data Preparation
 - Records are aggregated by hydrological year and calendar month to form a monthly time series.
-- The current incomplete year (2025) is excluded from training.
+- The current incomplete year (2025) is excluded from training to avoid mixing partial and full periods.
 
 ### 2. Feature Engineering
 Temporal features are created to capture autocorrelation and seasonality:
@@ -47,23 +47,24 @@ Temporal features are created to capture autocorrelation and seasonality:
 | `mes` | Calendar month (1–12, explicit seasonality) |
 
 ### 3. Train/Test Split
-A **chronological 80/20 split** is used — no shuffling — to respect the time-series structure and prevent data leakage.
+A **chronological 80/20 split** is used — no shuffling — to respect the time-series structure and reduce leakage risk.
 
 ### 4. Models
 
 | Model | Description |
 |---|---|
 | **Gradient Boosting** | 300 estimators, max depth 4, learning rate 0.05, 80% subsample |
-| **SARIMA(1,1,1)(1,1,1)[12]** | Univariate seasonal ARIMA for baseline comparison |
-| **Linear Regression** | Trend-only baseline (reproduces the original project's approach) |
+| **SARIMA(1,1,1)(1,1,1)[12]** | Univariate seasonal ARIMA used as a classical time-series baseline |
+| **Linear Regression** | Trend-only baseline that mirrors the original simplified approach |
 
 ### 5. Evaluation Metrics
 - **MAE** — Mean Absolute Error (km²)
 - **RMSE** — Root Mean Squared Error (km²)
 - **R²** — Coefficient of determination
+- Results should be interpreted as a single temporal holdout, not as a fully validated production benchmark.
 
 ### 6. 2025 Forecast
-A recursive 12-step forecast is generated using the Gradient Boosting model, updating lag features with each predicted value.
+A recursive 12-step forecast is generated using the Gradient Boosting model, updating lag features with each predicted value. Because the forecast is recursive, uncertainty accumulates across months.
 
 ---
 
@@ -73,17 +74,17 @@ A recursive 12-step forecast is generated using the Gradient Boosting model, upd
 |---|---|---|
 | Linear Regression (baseline) | — | ~0.0001 |
 | SARIMA(1,1,1)(1,1,1)[12] | — | — |
-| **Gradient Boosting** | — | **significant improvement** |
+| **Gradient Boosting** | — | **best result in this notebook run** |
 
-> Exact metric values are printed at runtime and depend on the full dataset.
+> Exact metric values are printed at runtime and depend on the notebook execution and dataset slice used.
 
 ---
 
 ## Key Findings
 
-- **Peak deforestation months** are August, September, and October — corresponding to the dry season in the Amazon.
-- **Lag features** (especially `lag_1` and `lag_12`) are the most important predictors, suggesting strong short-term and annual autocorrelation.
-- **2024/2025** stands out as a record-breaking period, signaling an urgent acceleration of forest loss.
+- **Peak deforestation months** are August, September, and October in this aggregated series, matching the dry season in the Amazon.
+- **Lag features** (especially `lag_1` and `lag_12`) are the most important predictors, suggesting strong short-term and annual autocorrelation in this data slice.
+- **2024/2025** stands out as the highest-alert period in the available record, which indicates acceleration in the series, not a causal statement by itself.
 
 ---
 
@@ -125,6 +126,12 @@ amazon_deforestation/
 - Two production-grade models: SARIMA + Gradient Boosting
 - Proper time-series metrics (MAE, RMSE, R²)
 - Rich interactive dashboard
+
+## Limitations
+
+- The analysis uses one aggregated monthly series, so it does not model per-state dynamics directly.
+- The forecast is point estimate only; it does not include confidence intervals or scenario bands.
+- The notebook demonstrates a single temporal holdout, so the results should be read as an exploratory benchmark rather than final operational validation.
 
 ---
 
